@@ -1,0 +1,46 @@
+{
+  "name": "nsg-datepicker",
+  "version": "1.0.0",
+  "description": "Simple Angular2 RC1 DatePicker component",
+  "main": "nsg-datepicker.js",
+  "typings": "./nsg-datepicker.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "tsc",
+    "typings": "typings"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nileshgokhalepune/nsg-datepicker.git"
+  },
+  "keywords": [
+    "angular2",
+    "date",
+    "datepicker",
+    "directive"
+  ],
+  "author": "Nilesh Gokhale",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nileshgokhalepune/nsg-datepicker/issues"
+  },
+  "homepage": "https://github.com/nileshgokhalepune/nsg-datepicker#readme",
+  "dependencies": {
+    "@angular/common": "^2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    
+    "systemjs": "0.19.27",
+    "core-js": "^2.4.0",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "^0.6.12",
+    
+    "moment": "^2.13.0",
+    "font-awesome": "4.6.3"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.10"
+  }
+}

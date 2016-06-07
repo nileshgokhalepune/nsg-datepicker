@@ -1,0 +1,6 @@
+{
+  "name": "Nsg-datepicker",
+  "tagline": "A Simple Angular 2 DatePicker",
+  "body": "# nsg-datepicker\r\nA Simple Angular 2 DatePicker\r\n\r\n**nsg-datepicker** is a datepicker component for Angular 2 RC1\r\n\r\n##Demo\r\n\r\n##Installation\r\n````shell\r\nnpm install --save nsg-datepicker\r\n````",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

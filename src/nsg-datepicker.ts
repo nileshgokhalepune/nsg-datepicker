@@ -102,8 +102,8 @@ const moment: moment.MomentStatic = (<any>moment_)['default'] || moment_;
             </table>
             <table>
                 <tr *ngFor="let row of [0,1,2,3]">
-                    <td *ngFor="let cell of [0,1,2,3]">
-                        {{calMonthsLabel[monthIndex]}}
+                    <td *ngFor="let cell of totalMonths">
+                        {{calMonthsLabel[cell]}}
                     </td>
                 </tr>
             </table>
@@ -118,7 +118,7 @@ const moment: moment.MomentStatic = (<any>moment_)['default'] || moment_;
 export class DatePicker implements OnInit, ControlValueAccessor {
     private selDate: string;
     private selDay: number;
-    private curDay: number;
+    private curDay: number; 
     private curMonth: number;
     private onChange: Function;
     private onTouched: Function;
@@ -126,6 +126,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     private calDaysLabel: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     private calMonthsLabel: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     private calDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    private totalMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     private today: moment.Moment;
     private month: number;
     private year: number;
@@ -140,7 +141,9 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     private yearView: boolean = false;
     private cd: any;
     private typed: boolean = false;
+
     @Input('date-format') dateFormat: string;
+    @Input('start-date') startDate: string;
 
     ngOnInit(): void {
         var firstDay = new Date(this.year, this.month, 1);

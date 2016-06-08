@@ -29,6 +29,8 @@ export class AppComponent{
 }
 ```
 
+![alt tag](https://github.com/nileshgokhalepune/nsg-datepicker/snapshot.JPG)
+
 ## Author
 
 Nilesh Gokhale

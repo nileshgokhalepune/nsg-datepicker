@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Nsg-datepicker : A Simple Angular 2 DatePicker">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Nsg-datepicker</title>
+    <meta charset="UTF-8">
+    <title>Nsg-datepicker by nileshgokhalepune</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Nsg-datepicker</h1>
+      <h2 class="project-tagline">A Simple Angular 2 DatePicker</h2>
+      <a href="https://github.com/nileshgokhalepune/nsg-datepicker" class="btn">View on GitHub</a>
+      <a href="https://github.com/nileshgokhalepune/nsg-datepicker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/nileshgokhalepune/nsg-datepicker/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/nileshgokhalepune/nsg-datepicker">View on GitHub</a>
-
-          <h1 id="project_title">Nsg-datepicker</h1>
-          <h2 id="project_tagline">A Simple Angular 2 DatePicker</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/nileshgokhalepune/nsg-datepicker/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/nileshgokhalepune/nsg-datepicker/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="nsg-datepicker" class="anchor" href="#nsg-datepicker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>nsg-datepicker</h1>
 
 <p>A Simple Angular 2 DatePicker</p>
@@ -45,18 +33,43 @@
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <div class="highlight highlight-source-shell"><pre>npm install --save nsg-datepicker</pre></div>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Nsg-datepicker maintained by <a href="https://github.com/nileshgokhalepune">nileshgokhalepune</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">import</span> {Component} <span class="pl-k">from</span> <span class="pl-s">'@angular/core'</span>;
+<span class="pl-k">import</span> {DatePicker} <span class="pl-k">from</span> <span class="pl-s">'nsg-datepicker/nsg-datepicker'</span>;
+
+@Component({
+    selector: <span class="pl-s">'app'</span>,
+    directives:[DatePicker]
+    template:<span class="pl-s">`</span>
+<span class="pl-s">            &lt;h1&gt;Hello Angular 2 DatePicker&lt;/h1&gt;</span>
+<span class="pl-s">            &lt;datepicker [(ngModel)]="myDateValue" dateFormat="MM/DD/YYYY"&gt;&lt;/datepicker&gt;</span>
+<span class="pl-s">           `</span>
+});
+<span class="pl-k">export</span> <span class="pl-k">class</span> <span class="pl-en">AppComponent</span>{
+    <span class="pl-v">myDateValue</span>: <span class="pl-k">any</span>;
+}</pre></div>
+
+<h2>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h2>
+
+<p>Nilesh Gokhale</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>UNLICENSED. You can use this datepicker at your own risk. Feel free to modify the code as you like based on your requriements.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/nileshgokhalepune/nsg-datepicker">Nsg-datepicker</a> is maintained by <a href="https://github.com/nileshgokhalepune">nileshgokhalepune</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "name": "Nsg-datepicker",
   "tagline": "A Simple Angular 2 DatePicker",
-  "body": "# nsg-datepicker\r\nA Simple Angular 2 DatePicker\r\n\r\n**nsg-datepicker** is a datepicker component for Angular 2 RC1\r\n\r\n##Demo\r\n\r\n##Installation\r\n````shell\r\nnpm install --save nsg-datepicker\r\n````",
+  "body": "# nsg-datepicker\r\nA Simple Angular 2 DatePicker\r\n\r\n**nsg-datepicker** is a datepicker component for Angular 2 RC1\r\n\r\n##Demo\r\n\r\n##Installation\r\n````shell\r\nnpm install --save nsg-datepicker\r\n````\r\n\r\n## Example\r\n\r\n```ts\r\nimport {Component} from '@angular/core';\r\nimport {DatePicker} from 'nsg-datepicker/nsg-datepicker';\r\n\r\n@Component({\r\n    selector: 'app',\r\n    directives:[DatePicker]\r\n    template:`\r\n            <h1>Hello Angular 2 DatePicker</h1>\r\n            <datepicker [(ngModel)]=\"myDateValue\" dateFormat=\"MM/DD/YYYY\"></datepicker>\r\n           `\r\n});\r\nexport class AppComponent{\r\n    myDateValue: any;\r\n}\r\n```\r\n\r\n## Author\r\n\r\nNilesh Gokhale\r\n\r\n## License\r\n\r\nUNLICENSED. You can use this datepicker at your own risk. Feel free to modify the code as you like based on your requriements.",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }

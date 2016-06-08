@@ -29,7 +29,7 @@ export class AppComponent{
 }
 ```
 
-![alt tag](https://github.com/nileshgokhalepune/nsg-datepicker/snapshot.JPG)
+![alt tag](https://github.com/nileshgokhalepune/nsg-datepicker/blob/master/snapshot.JPG)
 
 ## Author
 

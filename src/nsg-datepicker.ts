@@ -14,7 +14,9 @@ const moment: moment.MomentStatic = (<any>moment_)['default'] || moment_;
     },
     styles: [`
         .date-container{
-            width:50%;
+            margine:5px;
+            padding:2px;
+            position:relative;
         }
         
         .dpDropClosed{
@@ -23,6 +25,8 @@ const moment: moment.MomentStatic = (<any>moment_)['default'] || moment_;
         .dpDropOpen{
             display:block;
             position:absolute;
+            z-index:9999;
+            min-width:70%;
         }
         .yearLabel{
             text-align: center;
@@ -73,40 +77,58 @@ const moment: moment.MomentStatic = (<any>moment_)['default'] || moment_;
         .currentDay{
             border:1px solid red!important;
         }
+        .inline{
+            display:flex;
+            flex-direction:row;
+            padding:3px;
+            min-width:100%;
+        }
     `],
     template: `
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <div class="date-container">
-        <input type='text' [value]="selDate" (blur)="blur($event)" (keypress)="valueChanging()"/><i class='fa fa-calendar-o pointer' (click)="displayDateBox($event)"></i>
-        <div [ngClass]="{dpDropClosed: isClosed, dpDropOpen: !isClosed}">
-            <div class="yearLabel">{{year}}</div>
-            <div class="monthLabel">
-                <button class="month-navigate-left" (click)="previousMonth($event)"><i class="fa fa-angle-left"></i></button>
-                <button class="month-button fa">{{monthName}}</button>
-                <button class="month-navigate-right" (click)="nextMonth($event)"><i class="fa fa-angle-right"></i></button>
-            </div>
-            <table class="table" *ngIf="dateView">
-                <tr class="dayLabelRow">
-                    <th *ngFor="let day of calDaysLabel">
-                        <span>{{day}}</span>
-                    </th>
-                </tr>
-                <tr *ngFor="let days of dayRows">
-                    <td *ngFor="let day of days">
-                        <div  (click)="selectDate(day)" title="{{curDay==day ? 'Today' : ''}}" [ngClass]="{selectedDay: day==selDay && month==selectedMonth, currentDay: day==curDay && selectedMonth==curMonth}" class="pointer">
-                            <span>{{day}}</span>  
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr *ngFor="let row of [0,1,2,3]">
-                    <td *ngFor="let cell of totalMonths">
-                        {{calMonthsLabel[cell]}}
-                    </td>
-                </tr>
-            </table>
+    <div class="date-container" [style.margin-left]="2 + 'px'" [style.margin-top]="2 + 'px'" [style.margin-right]="2 + 'px'" [style.width]="200 + 'px'">
+            <div [style.width]="100 + '%'"> <input type='text' [value]="!dateChanged && showDeaultDate ===false ? null : selDate" (blur)="blur($event)"  (keypress)="valueChanging()"/><i class='fa fa-calendar-o pointer' (click)="displayDateBox($event)"></i></div>
+            <div [ngClass]="{dpDropClosed: isClosed, dpDropOpen: !isClosed}">
+                <div class="yearLabel">{{year}}</div>
+                <div>                
+                    <div class="monthLabel">
+                        <button class="month-navigate-left" (click)="previousMonth($event)"><i class="fa fa-angle-left"></i></button>
+                        <button class="month-button" (click)="enableMonthView()">{{monthName}}</button>
+                        <button class="month-navigate-right" (click)="nextMonth($event)"><i class="fa fa-angle-right"></i></button>
+                    </div>
+                    <table class="table" *ngIf="!monthView">
+                        <tr class="dayLabelRow">
+                            <th *ngFor="let day of calDaysLabel">
+                                <span>{{day}}</span>
+                            </th>
+                        </tr>
+                        <tr *ngFor="let days of dayRows">
+                            <td *ngFor="let day of days">
+                                <div  (click)="selectDate(day)" title="{{curDay==day ? 'Today' : ''}}" [ngClass]="{selectedDay: day==selDay && month==selectedMonth, currentDay: day==curDay && selectedMonth==curMonth}" class="pointer">
+                                    <span>{{day}}</span>  
+                                </div>
+                            </td>
+                        </tr>
+                    </table> 
+                    <table class="table" *ngIf='monthView'>
+                        <tr>
+                            <td *ngFor="let cell of [0,1,2,3]" [style.width]="25 + '%'">
+                                <label class="pointer" (click)="selectMonth(cell)">{{shortCalMonthsLabel[cell]}}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td *ngFor="let cell of [4,5,6,7]" [style.width]="25 + '%'">
+                                <label class="pointer" (click)="selectMonth(cell)">{{shortCalMonthsLabel[cell]}}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td *ngFor="let cell of [8,9,10,11]" [style.width]="25 + '%'">
+                                <label class="pointer" (click)="selectMonth(cell)">{{shortCalMonthsLabel[cell]}}</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
         </div>
     </div>
     `,
@@ -118,13 +140,14 @@ const moment: moment.MomentStatic = (<any>moment_)['default'] || moment_;
 export class DatePicker implements OnInit, ControlValueAccessor {
     private selDate: string;
     private selDay: number;
-    private curDay: number; 
+    private curDay: number;
     private curMonth: number;
     private onChange: Function;
     private onTouched: Function;
     private isClosed: boolean = true;
     private calDaysLabel: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     private calMonthsLabel: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    private shortCalMonthsLabel: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Octr', 'Nov', 'Dec'];
     private calDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     private totalMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     private today: moment.Moment;
@@ -141,9 +164,12 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     private yearView: boolean = false;
     private cd: any;
     private typed: boolean = false;
+    private dateChanged: boolean = false;
+    private monthButtonClicked: boolean = false;
 
     @Input('date-format') dateFormat: string;
     @Input('start-date') startDate: string;
+    @Input('show-default-date') showDeaultDate: boolean = false;
 
     ngOnInit(): void {
         var firstDay = new Date(this.year, this.month, 1);
@@ -236,6 +262,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
 
     private selectDate(day: number): void {
         if (!day) return;
+        this.dateChanged = true;
         var selected = new Date(this.year, this.selectedMonth, day);
         this.selDate = moment(selected).format(this.dateFormat);
         this.selDay = moment(this.selDate).get("date");
@@ -247,15 +274,20 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.dateView = false;
         this.monthView = true;
         this.yearView = false;
+        this.monthButtonClicked = true;
     }
 
     private onDocumentClick(event: any) {
-        if (event.target !== this._eref.nativeElement) {
+        if (event.target !== this._eref.nativeElement && !this.monthButtonClicked) {
             this.isClosed = true;
+            this.monthView = false;
+        } else {
+            this.monthButtonClicked = false;
         }
     }
 
     private setValue(value: any): void {
+        if (!this.dateChanged && this.showDeaultDate === false) return;
         let val = moment(value, this.dateFormat || 'YYYY-MM-DD');
         this.cd.viewToModelUpdate(val);
     }
@@ -293,5 +325,16 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     }
 
     registerOnTouched(fn: (_: any) => {}): void {
+    }
+
+    private selectMonth(month: number) {
+        this.monthView = false;
+        this.dateView = true;
+        this.selectedMonth = month;
+        this.monthButtonClicked = true;
+        this.dayRows = new Array();
+        var firstDay = new Date(this.year, month, 1);
+        var startingDay = firstDay.getDay();
+        this.generateCalendar(startingDay)
     }
 } 

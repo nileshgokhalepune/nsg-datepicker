@@ -1,6 +1,6 @@
 {
   "name": "nsg-datepicker",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "Simple Angular2 RC1 DatePicker component",
   "main": "nsg-datepicker.js",
   "typings": "./nsg-datepicker.d.ts",
